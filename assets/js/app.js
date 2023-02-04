@@ -1,3 +1,9 @@
+/* Buscamos nos situamos en la base de datos en el apartado de
+usuarios y a partir de ese punto y mediante una promesa se buscan
+los datos de un usuario en específico. 
+Si se consume la promesa mostrará los datos mediante la API y en consola
+Si la promesa es rechazada debe llamar a la función handleError*/
+
 const baseEndpoint = 'https://api.github.com';  
 const usersEndpoint = `${baseEndpoint}/users`;
 const $n = document.querySelector('.name'); //Se colocó un "."
@@ -13,6 +19,7 @@ async function displayUser(username) { //Se agregó la palabra "async"
   $b.textContent = `${data.blog}`;   
   $n.textContent = `${data.name}`; 
   $l.textContent = `${data.location}`;
+  return response
 }
 
 function handleError(err) {
@@ -20,5 +27,6 @@ function handleError(err) {
   console.log(err);
   $n.textContent = `Algo salió mal: ${err}`; //Agregar signo $ del selector
 }
-
-displayUser('stolinski').catch(handleError('stolinski')); //Mandar llamar a la función con () y parámetro
+ 
+displayUser('stolinski').catch(handleError()); //Mandar llamar a la función con () y parámetro
+//No supe cómo trabaja el .catch en esta promesa
